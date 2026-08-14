@@ -1,0 +1,1081 @@
+DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChoopaNature - Photos de Nature</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      background: #050505;
+      border-bottom: 1px solid #222;
+      padding: 18px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .logo span {
+      color: #4caf50;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: #4caf50;
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+
+      background:
+        linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.85)),
+        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1800&q=80");
+
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: 60px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #4caf50;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #ddd;
+      margin-bottom: 35px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #4caf50;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: #3d8f40;
+    }
+
+    /* ================= SEARCH ================= */
+
+    .search-section {
+      padding: 50px 7%;
+      text-align: center;
+    }
+
+    .search-section h2 {
+      margin-bottom: 20px;
+      font-size: 30px;
+    }
+
+    .search-box {
+      max-width: 650px;
+      margin: auto;
+      display: flex;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 16px;
+      background: #111;
+      border: 1px solid #333;
+      color: white;
+      border-radius: 8px 0 0 8px;
+      outline: none;
+    }
+
+    .search-box button {
+      padding: 16px 25px;
+      border: none;
+      background: #4caf50;
+      color: white;
+      cursor: pointer;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* ================= CATEGORIES ================= */
+
+    .categories {
+      padding: 30px 7%;
+      text-align: center;
+    }
+
+    .categories h2 {
+      margin-bottom: 25px;
+    }
+
+    .category-list {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .category {
+      background: #111;
+      border: 1px solid #333;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .category:hover {
+      background: #4caf50;
+      border-color: #4caf50;
+    }
+
+    /* ================= GALLERY ================= */
+
+    .gallery-section {
+      padding: 60px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 35px;
+      margin-bottom: 40px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .photo-card {
+      background: #101010;
+      border: 1px solid #252525;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: .3s;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-7px);
+      border-color: #4caf50;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-info {
+      padding: 18px;
+    }
+
+    .photo-info h3 {
+      margin-bottom: 8px;
+    }
+
+    .photographer {
+      color: #999;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      color: #4caf50;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .buy-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: #4caf50;
+      color: white;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .buy-btn:hover {
+      background: #3d8f40;
+    }
+
+    /* ================= PHOTOGRAPHER ================= */
+
+    .photographer-section {
+      padding: 80px 7%;
+      background: #080808;
+      text-align: center;
+    }
+
+    .photographer-section h2 {
+      font-size: 35px;
+      margin-bottom: 20px;
+    }
+
+    .photographer-section p {
+      color: #bbb;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      line-height: 1.7;
+    }
+
+    /* ================= HOW IT WORKS ================= */
+
+    .steps {
+      padding: 80px 7%;
+      text-align: center;
+    }
+
+    .step-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .step {
+      background: #111;
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid #252525;
+    }
+
+    .step-number {
+      width: 50px;
+      height: 50px;
+      margin: auto auto 20px;
+      background: #4caf50;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .step p {
+      color: #aaa;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      background: #050505;
+      border-top: 1px solid #222;
+      padding: 40px 7%;
+      text-align: center;
+    }
+
+    footer h2 {
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      color: #888;
+    }
+
+    .footer-links {
+      margin: 20px 0;
+    }
+
+    .footer-links a {
+      color: #aaa;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .footer-links a:hover {
+      color: #4caf50;
+    }
+
+    /* ================= MODAL ================= */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.8);
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #111;
+      border: 1px solid #333;
+      width: 100%;
+      max-width: 450px;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 15px;
+    }
+
+    .modal-content p {
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+
+    .close {
+      float: right;
+      font-size: 25px;
+      cursor: pointer;
+      color: #aaa;
+    }
+
+    .close:hover {
+      color: white;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 15px 5%;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #080808;
+        flex-direction: column;
+        padding: 25px;
+        text-align: center;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero {
+        min-height: 500px;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-box input,
+      .search-box button {
+        border-radius: 7px;
+        margin-bottom: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+
+  <header>
+
+    <div class="logo">
+      Choopa<span>Nature</span>
+    </div>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <nav id="menu">
+      <a href="#accueil">Accueil</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#categories">Catégories</a>
+      <a href="#photographe">Photographes</a>
+      <a href="#comment-ca-marche">Comment ça marche</a>
+    </nav>
+
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+
+  <section class="hero" id="accueil">
+
+    <div class="hero-content">
+
+      <h1>
+        La beauté de la <span>nature</span>
+      </h1>
+
+      <p>
+        Découvrez, partagez et achetez de magnifiques photographies
+        de la nature réalisées par des photographes.
+      </p>
+
+      <a href="#galerie" class="btn">
+        Explorer les photos
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= SEARCH ================= -->
+
+  <section class="search-section">
+
+    <h2>🔎 Trouvez votre photo</h2>
+
+    <div class="search-box">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Rechercher une photo..."
+        onkeyup="searchPhotos()"
+      >
+
+      <button onclick="searchPhotos()">
+        Rechercher
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CATEGORIES ================= -->
+
+  <section class="categories" id="categories">
+
+    <h2>Explorer par catégorie</h2>
+
+    <div class="category-list">
+
+      <button class="category" onclick="filterPhotos('all')">
+        Toutes
+      </button>
+
+      <button class="category" onclick="filterPhotos('paysage')">
+        🌄 Paysages
+      </button>
+
+      <button class="category" onclick="filterPhotos('foret')">
+        🌳 Forêts
+      </button>
+
+      <button class="category" onclick="filterPhotos('mer')">
+        🌊 Océans
+      </button>
+
+      <button class="category" onclick="filterPhotos('montagne')">
+        🏔️ Montagnes
+      </button>
+
+      <button class="category" onclick="filterPhotos('fleurs')">
+        🌺 Fleurs
+      </button>
+
+      <button class="category" onclick="filterPhotos('animaux')">
+        🐦 Animaux
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= GALLERY ================= -->
+
+  <section class="gallery-section" id="galerie">
+
+    <h2 class="section-title">
+      Photos populaires
+    </h2>
+
+    <div class="gallery" id="gallery">
+
+
+      <!-- PHOTO 1 -->
+
+      <div class="photo-card" data-category="paysage">
+
+        <img
+          src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80"
+          alt="Paysage"
+        >
+
+        <div class="photo-info">
+
+          <h3>Coucher de soleil</h3>
+
+          <p class="photographer">
+            📷 Photo par Choopa
+          </p>
+
+          <div class="price">
+            $5.00
+          </div>
+
+          <button
+            class="buy-btn"
+            onclick="openBuy('Coucher de soleil', '5.00')"
+          >
+            Acheter
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PHOTO 2 -->
+
+      <div class="photo-card" data-category="foret">
+
+        <img
+          src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80"
+          alt="Forêt"
+        >
+
+        <div class="photo-info">
+
+          <h3>Forêt mystérieuse</h3>
+
+          <p class="photographer">
+            📷 Photo par Sarah
+          </p>
+
+          <div class="price">
+            $7.00
+          </div>
+
+          <button
+            class="buy-btn"
+            onclick="openBuy('Forêt mystérieuse', '7.00')"
+          >
+            Acheter
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PHOTO 3 -->
+
+      <div class="photo-card" data-category="mer">
+
+        <img
+          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80"
+          alt="Océan"
+        >
+
+        <div class="photo-info">
+
+          <h3>Océan bleu</h3>
+
+          <p class="photographer">
+            📷 Photo par David
+          </p>
+
+          <div class="price">
+            $8.00
+          </div>
+
+          <button
+            class="buy-btn"
+            onclick="openBuy('Océan bleu', '8.00')"
+          >
+            Acheter
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PHOTO 4 -->
+
+      <div class="photo-card" data-category="montagne">
+
+        <img
+          src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80"
+          alt="Montagne"
+        >
+
+        <div class="photo-info">
+
+          <h3>Montagnes</h3>
+
+          <p class="photographer">
+            📷 Photo par Michael
+          </p>
+
+          <div class="price">
+            $10.00
+          </div>
+
+          <button
+            class="buy-btn"
+            onclick="openBuy('Montagnes', '10.00')"
+          >
+            Acheter
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PHOTO 5 -->
+
+      <div class="photo-card" data-category="fleurs">
+
+        <img
+          src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=80"
+          alt="Fleurs"
+        >
+
+        <div class="photo-info">
+
+          <h3>Fleurs sauvages</h3>
+
+          <p class="photographer">
+            📷 Photo par Anna
+          </p>
+
+          <div class="price">
+            $4.00
+          </div>
+
+          <button
+            class="buy-btn"
+            onclick="openBuy('Fleurs sauvages', '4.00')"
+          >
+            Acheter
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PHOTO 6 -->
+
+      <div class="photo-card" data-category="animaux">
+
+        <img
+          src="https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&w=900&q=80"
+          alt="Oiseau"
+        >
+
+        <div class="photo-info">
+
+          <h3>Oiseau dans la nature</h3>
+
+          <p class="photographer">
+            📷 Photo par James
+          </p>
+
+          <div class="price">
+            $6.00
+          </div>
+
+          <button
+            class="buy-btn"
+            onclick="openBuy('Oiseau dans la nature', '6.00')"
+          >
+            Acheter
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PHOTOGRAPHER ================= -->
+
+  <section class="photographer-section" id="photographe">
+
+    <h2>📷 Vous êtes photographe ?</h2>
+
+    <p>
+      Partagez vos plus belles photographies de la nature avec
+      notre communauté et gagnez de l'argent grâce à vos créations.
+    </p>
+
+    <button class="btn" onclick="photographerMessage()">
+      Devenir photographe
+    </button>
+
+  </section>
+
+
+  <!-- ================= HOW IT WORKS ================= -->
+
+  <section class="steps" id="comment-ca-marche">
+
+    <h2 class="section-title">
+      Comment ça marche ?
+    </h2>
+
+    <div class="step-container">
+
+      <div class="step">
+
+        <div class="step-number">
+          1
+        </div>
+
+        <h3>Publiez</h3>
+
+        <p>
+          Les photographes publient leurs meilleures photos
+          de nature.
+        </p>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">
+          2
+        </div>
+
+        <h3>Découvrez</h3>
+
+        <p>
+          Les visiteurs explorent la galerie et trouvent
+          leurs photos préférées.
+        </p>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">
+          3
+        </div>
+
+        <h3>Achetez</h3>
+
+        <p>
+          L'utilisateur choisit une photo et effectue son achat.
+        </p>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">
+          4
+        </div>
+
+        <h3>Téléchargez</h3>
+
+        <p>
+          Après paiement, l'acheteur peut télécharger
+          sa photo.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <h2>Choopa<span style="color:#4caf50;">Nature</span></h2>
+
+    <p>
+      La nature à travers votre objectif.
+    </p>
+
+    <div class="footer-links">
+
+      <a href="#accueil">Accueil</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#photographe">Photographes</a>
+      <a href="#">Contact</a>
+
+    </div>
+
+    <p>
+      © 2026 ChoopaNature. Tous droits réservés.
+    </p>
+
+  </footer>
+
+
+  <!-- ================= BUY MODAL ================= -->
+
+  <div class="modal" id="buyModal">
+
+    <div class="modal-content">
+
+      <span class="close" onclick="closeBuy()">
+        ×
+      </span>
+
+      <h2>🛒 Acheter cette photo</h2>
+
+      <p id="selectedPhoto"></p>
+
+      <p>
+        Prix :
+        <strong id="selectedPrice"></strong>
+      </p>
+
+      <button
+        class="btn"
+        onclick="confirmPurchase()"
+      >
+        Continuer vers le paiement
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    /* MENU MOBILE */
+
+    function toggleMenu() {
+
+      document
+        .getElementById("menu")
+        .classList
+        .toggle("active");
+
+    }
+
+
+    /* ACHAT */
+
+    let currentPhoto = "";
+    let currentPrice = "";
+
+    function openBuy(photo, price) {
+
+      currentPhoto = photo;
+      currentPrice = price;
+
+      document.getElementById("selectedPhoto").innerText =
+        "Photo : " + photo;
+
+      document.getElementById("selectedPrice").innerText =
+        "$" + price;
+
+      document.getElementById("buyModal").style.display =
+        "flex";
+
+    }
+
+
+    function closeBuy() {
+
+      document.getElementById("buyModal").style.display =
+        "none";
+
+    }
+
+
+    function confirmPurchase() {
+
+      alert(
+        "Paiement pour \"" +
+        currentPhoto +
+        "\" de $" +
+        currentPrice +
+        ".\n\nLe système de paiement sera connecté prochainement."
+      );
+
+      closeBuy();
+
+    }
+
+
+    /* RECHERCHE */
+
+    function searchPhotos() {
+
+      const search =
+        document
+          .getElementById("searchInput")
+          .value
+          .toLowerCase();
+
+      const photos =
+        document.querySelectorAll(".photo-card");
+
+      photos.forEach(function(photo) {
+
+        const text =
+          photo.innerText.toLowerCase();
+
+        if (text.includes(search)) {
+
+          photo.style.display = "block";
+
+        } else {
+
+          photo.style.display = "none";
+
+        }
+
+      });
+
+    }
+
+
+    /* FILTRE */
+
+    function filterPhotos(category) {
+
+      const photos =
+        document.querySelectorAll(".photo-card");
+
+      photos.forEach(function(photo) {
+
+        if (
+          category === "all" ||
+          photo.dataset.category === category
+        ) {
+
+          photo.style.display = "block";
+
+        } else {
+
+          photo.style.display = "none";
+
+        }
+
+      });
+
+    }
+
+
+    /* PHOTOGRAPHE */
+
+    function photographerMessage() {
+
+      alert(
+        "Bienvenue sur ChoopaNature !\n\n" +
+        "La création du compte photographe sera disponible prochainement."
+      );
+
+    }
+
+
+    /* FERMER MODAL EN CLIQUANT À L'EXTÉRIEUR */
+
+    window.onclick = function(event) {
+
+      const modal =
+        document.getElementById("buyModal");
+
+      if (event.target === modal) {
+
+        closeBuy();
+
+      }
+
+    };
+
+  </script>
+
+</body>
+  </html>
